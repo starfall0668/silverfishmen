@@ -1,11 +1,11 @@
 import Sprite from '../base/sprite'
-import Bullet from './bullet'
+import Hook from './hook'
 import DataBus from '../databus'
 
 const screenWidth = window.innerWidth
 const screenHeight = window.innerHeight
 
-// 玩家相关常量设置
+// 玩家相关常量的设置
 const PLAYER_IMG_SRC = 'images/hero.png'
 const PLAYER_WIDTH = 150
 const PLAYER_HEIGHT = 120
@@ -20,10 +20,10 @@ export default class Player extends Sprite {
     this.x = screenWidth / 2 - this.width / 2
     this.y = 10
 
-    // 用于在手指移动的时候标识手指是否已经在飞机上了
+    // 用于在手指移动的时候标识手指是否已经在鱼钩上了
     this.touched = false
 
-    this.bullets = []
+    this.hooks = []
 
     // 初始化事件监听
     this.initEvent()
@@ -31,12 +31,12 @@ export default class Player extends Sprite {
 
   /**
    * 当手指触摸屏幕的时候
-   * 判断手指是否在飞机上
+   * 判断手指是否在鱼钩上
    * @param {Number} x: 手指的X轴坐标
    * @param {Number} y: 手指的Y轴坐标
-   * @return {Boolean}: 用于标识手指是否在飞机上的布尔值
+   * @return {Boolean}: 用于标识手指是否在鱼钩上的布尔值
    */
-  checkIsFingerOnAir(x, y) {
+  checkIsFingerOnMan(x, y) {
     const deviation = 30
 
     return !!(x >= this.x - deviation
@@ -46,11 +46,11 @@ export default class Player extends Sprite {
   }
 
   /**
-   * 根据手指的位置设置飞机的位置
-   * 保证手指处于飞机中间
-   * 同时限定飞机的活动范围限制在屏幕中
+   * 根据手指的位置设置鱼钩的位置
+   * 保证手指处于鱼钩中间
+   * 同时限定鱼钩的活动范围限制在屏幕中
    */
-  setAirPosAcrossFingerPosZ(x, y) {
+  setManPosAcrossFingerPosZ(x, y) {
     let disX = x - this.width / 2
     let disY = y - this.height / 2
 
@@ -68,7 +68,7 @@ export default class Player extends Sprite {
 
   /**
    * 玩家响应手指的触摸事件
-   * 改变战机的位置
+   * 改变渔夫的位置
    */
   initEvent() {
     canvas.addEventListener('touchstart', ((e) => {
@@ -102,18 +102,18 @@ export default class Player extends Sprite {
   }
 
   /**
-   * 玩家射击操作
-   * 射击时机由外部决定
+   * 玩家钓鱼操作
+   * 钓鱼的时机由外部决定
    */
   shoot() {
-    const bullet = databus.pool.getItemByClass('bullet', Bullet)
+    const hook = databus.pool.getItemByClass('hook', Hook)
 
-    bullet.init(
-      this.x + this.width / 2 - bullet.width / 2,
+    hook.init(
+      this.x + this.width / 2 - hook.width / 2,
       this.y - 10,
       10
     )
 
-    databus.bullets.push(bullet)
+    databus.hooks.push(hook)
   }
 }
