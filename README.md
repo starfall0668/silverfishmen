@@ -11,9 +11,9 @@
 │   ├── symbol.js                          // ES6 Symbol简易兼容
 │   └── weapp-adapter.js                   // 小游戏适配器
 ├── npc
-│   └── enemy.js                           // 敌机类
+│   └── fish.js                            // 鱼类
 ├── player
-│   ├── bullet.js                          // 子弹类
+│   ├── hook.js                            // 鱼钩类
 │   └── index.js                           // 玩家类
 ├── runtime
 │   ├── background.js                      // 背景类
