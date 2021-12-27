@@ -19,33 +19,34 @@ export default class DataBus {
   reset() {
     this.frame = 0
     this.score = 0
-    this.bullets = []
-    this.enemys = []
+    this.hooks = []
+    this.fishs = []
     this.animations = []
     this.gameOver = false
   }
 
   /**
-   * 回收敌人，进入对象池
+   * 回收鱼，进入对象池
    * 此后不进入帧循环
    */
-  removeEnemey(enemy) {
-    const temp = this.enemys.shift()
+  removeFishs(fish) {
+    const temp = this.fishs.shift()
 
     temp.visible = false
 
-    this.pool.recover('enemy', enemy)
+    this.pool.recover('fish', fish)
   }
 
   /**
-   * 回收子弹，进入对象池
+   * 回收鱼钩，进入对象池
    * 此后不进入帧循环
    */
-  removeBullets(bullet) {
-    const temp = this.bullets.shift()
+  removeHooks(hook) {
+    const temp = this.hooks.shift()
 
     temp.visible = false
 
-    this.pool.recover('bullet', bullet)
+    this.pool.recover('hook', hook)
   }
 }
+
