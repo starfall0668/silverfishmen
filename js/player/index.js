@@ -78,10 +78,10 @@ export default class Player extends Sprite {
       const y = e.touches[0].clientY
 
       //
-      if (this.checkIsFingerOnAir(x, y)) {
+      if (this.checkIsFingerOnMan(x, y)) {
         this.touched = true
 
-        this.setAirPosAcrossFingerPosZ(x, y)
+        this.setManPosAcrossFingerPosZ(x, y)
       }
     }))
 
@@ -91,7 +91,7 @@ export default class Player extends Sprite {
       const x = e.touches[0].clientX
       const y = e.touches[0].clientY
 
-      if (this.touched) this.setAirPosAcrossFingerPosZ(x, y)
+      if (this.touched) this.setManPosAcrossFingerPosZ(x, y)
     }))
 
     canvas.addEventListener('touchend', ((e) => {
